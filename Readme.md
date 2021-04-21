@@ -54,10 +54,10 @@ ar rcs libadd.a add.o
 ranlib libadd.a
 ar rcs libmul.a mul.o libadd.a
 ranlib libmul.a
-gcc -shared -Wl,-soname=square -o libsqauare.so square.o libmul.a 
+gcc -shared -Wl,-soname=square -o libsquare.so square.o libmul.a 
 cc -fPIC -rdynamic -o test-w-lib.o -c test-w-lib.c
-cc -o test-w-lib libsqauare.so test-w-lib.o -ldl 
-/usr/bin/ld: libsqauare.so: undefined reference to `add'
+cc -o test-w-lib libsquare.so test-w-lib.o -ldl 
+/usr/bin/ld: libsquare.so: undefined reference to `add'
 collect2: error: ld returned 1 exit status
 make: *** [Makefile:10: test-w-lib] Error 1
 ```

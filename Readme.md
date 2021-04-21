@@ -1,5 +1,5 @@
 # Problem
-This is a MWE for [this SO Question]( https://stackoverflow.com/ )
+This is a MWE for [this SO Question]( https://stackoverflow.com/questions/67190990/create-a-sharred-object-c-which-depends-on-static-lib-b-which-itself-depends-o  )
 
 ## Situation
 I hava a __static library__ `libadd.a`, which can add two numbers `int add(int, int);`.

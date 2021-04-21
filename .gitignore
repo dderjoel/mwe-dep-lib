@@ -1,0 +1,5 @@
+.ccls-cache
+*.o
+*.so
+*.a
+test-*-lib

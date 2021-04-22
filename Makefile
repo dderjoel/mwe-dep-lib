@@ -8,8 +8,8 @@ test-wo-lib: add.o mul.o square.o test-wo-lib.o
 	$(CC) -o ${@} ${^}
 	./${@}
 
-test-w-lib: libsquare.so test-w-lib.o
-	$(CC) -o ${@} ${^} -ldl 
+test-w-lib: test-w-lib.o libsquare.so
+	$(CC) -o ${@} ${<} -ldl 
 	./${@}
 
 test-w-libmul: test-w-libmul.o libmul.a
@@ -17,7 +17,8 @@ test-w-libmul: test-w-libmul.o libmul.a
 	./${@}
 
 libsquare.so: square.o libmul.a
-	gcc -shared -Wl,-soname=square -o ${@} ${^} 
+	rm -rf libmul; 	mkdir libmul; cd libmul; ar x ../libmul.a
+	gcc -shared -Wl,-soname=square -o ${@} ${<} libmul/*.o
 
 %.o: %.c
 	$(CC) -fPIC -rdynamic -o ${@} -c ${^}
@@ -30,5 +31,6 @@ libadd.a: add.o
 	ranlib ${@}
 
 libmul.a: mul.o libadd.a
-	ar rcs ${@} ${^}
+	rm -rf libadd; mkdir libadd; cd libadd; ar x ../libadd.a
+	ar rcs ${@} ${<} ./libadd/*.o
 	ranlib ${@}

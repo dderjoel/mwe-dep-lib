@@ -2,8 +2,11 @@
 #include <stdio.h>
 
 int main() {
-  void *handle = dlopen("./libsqauare.so", RTLD_NOW);
+  void *handle = dlopen("./libsquare.so", RTLD_NOW);
   int (*sq)(int) = dlsym(handle, "square");
+  if (sq == NULL) {
+    printf("square not found in lib");
+  }
 
   for (int i = 0; i < 10; i++) {
     int res = sq(i);

@@ -1,4 +1,6 @@
-.PHONY: all clean all-w-lib all-wo-lib
+.PHONY: all clean test-w-lib test-wo-lib test-w-libmul
+.PRECIOUS: libsquare.so 
+
 
 all: clean test-wo-lib test-w-lib
 
@@ -8,6 +10,10 @@ test-wo-lib: add.o mul.o square.o test-wo-lib.o
 
 test-w-lib: libsquare.so test-w-lib.o
 	$(CC) -o ${@} ${^} -ldl 
+	./${@}
+
+test-w-libmul: test-w-libmul.o libmul.a
+	$(CC) -o ${@} ${<} libmul.a
 	./${@}
 
 libsquare.so: square.o libmul.a

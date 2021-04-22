@@ -3,3 +3,4 @@
 *.so
 *.a
 test-*-lib
+test-*-libmul
